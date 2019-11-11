@@ -6,6 +6,10 @@
 import { combineReducers } from 'redux';
 import simpleReducer from './simpleReducer';
 
-export default combineReducers({
-    simpleReducer
+const rootReducer = combineReducers({
+    simple: simpleReducer
 });
+
+console.log('ROOT:', rootReducer);
+
+export default rootReducer;

@@ -9,46 +9,30 @@ import Login from './Login';
 import Tracks from './Tracks';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { simpleAction } from './actions/simpleAction';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
-class App extends Component {
+// class App extends Component {
+function App() {
 
-  simpleAction = (event) => {
-    this.props.simpleAction();
-  }
+  const payLoadText = useSelector(state => state.simple);
+  const dispatch = useDispatch();
 
-  render() {
-    return (
-      <Router>
-        <div className="App">
-          <Switch>
-            <Route path="/login" exact component={Login} />
-            <Route path="/tracks" component={Tracks} />
-          </Switch>
-        <pre>
-          {
-            JSON.stringify(this.props)
-          }
-        </pre>
-        <button onClick={this.simpleAction}>Test redux action</button>
-        </div>
-      </Router>
-    );
-  }
+  return (
+    <Router>
+      <div className="App">
+        <Switch>
+          <Route path="/login" exact component={Login} />
+          <Route path="/tracks" component={Tracks} />
+        </Switch>
+        <h1>Text: {payLoadText}</h1>
+        <button onClick={() => dispatch(simpleAction())}>Test redux action</button>
+      </div>
+    </Router>
+  );
+
 }
 
-
-const mapStateToProps = state => ({
-  ...state
-})
-
-console.log(mapStateToProps);
-
-const mapDispatchToProps = dispatch => ({
-  simpleAction: () => dispatch(simpleAction())
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
 
 
 // export default App;

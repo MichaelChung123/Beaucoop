@@ -3,11 +3,15 @@
 
  checks to see what the action type is, and then returns the payload as an object.
 */
-export default (state = {}, action) => {
+
+const simpleReducer = (state = '', action) => {
     switch (action.type) {
         case 'SIMPLE_ACTION':
+            console.log('inside simple reducer');
             return action.payload;
         default:
             return state
     }
 }
+
+export default simpleReducer;
